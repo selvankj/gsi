@@ -1,0 +1,32 @@
+# .gsiignore — gsi suppression rules
+# Place this file in the root of your repository.
+# Lines starting with # are comments. Blank lines are ignored.
+
+# ── Ignore entire files ──────────────────────────────────────────────────────
+# tests/fixtures/fake_credentials.py
+# docs/examples/aws_setup.md
+
+# ── Ignore a specific line in a file ────────────────────────────────────────
+# config/local.py:10
+
+# ── Ignore a pattern type for matching paths ─────────────────────────────────
+# Syntax: [pattern_name] glob
+#
+# [secrets] tests/**
+# [generic_api_key] docs/**
+# [high_entropy_string] **/*_test.py
+
+# ── Common suppressions ──────────────────────────────────────────────────────
+# Uncomment the ones relevant to your project:
+
+# Test fixtures that contain fake/example credentials
+# [secrets] tests/fixtures/**
+# [secrets] tests/data/**
+
+# Documentation examples
+# [secrets] docs/**
+# [generic_api_key] README.md
+
+# Generated files
+# vendor/**
+# node_modules/**

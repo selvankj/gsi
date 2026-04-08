@@ -1,0 +1,56 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "gsi"
+version = "0.1.0"
+description = "Personal security gate for GitHub repos — scan before you use or publish."
+readme = "README.md"
+requires-python = ">=3.9"
+license = { text = "MIT" }
+keywords = ["security", "github", "secrets", "vulnerabilities", "devtools", "cli"]
+classifiers = [
+  "Development Status :: 3 - Alpha",
+  "Environment :: Console",
+  "Intended Audience :: Developers",
+  "Topic :: Security",
+  "Topic :: Software Development :: Quality Assurance",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.9",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+]
+
+dependencies = [
+  "typer[all]>=0.9.0",
+  "rich>=13.0.0",
+  "requests>=2.31.0",
+  "PyYAML>=6.0",
+  # gitpython REMOVED — replaced with subprocess git calls in github_client.py
+  # Reason: gitpython has RCE history (CVE-2022-24439 et al.) and cloning
+  # untrusted repos via gitpython is itself a security risk in a security tool.
+  # System git binary is used instead with a hardened environment.
+]
+
+[project.optional-dependencies]
+dev = [
+  "pytest>=7.0",
+  "pytest-mock>=3.0",
+  "responses>=0.23",   # mock HTTP requests in tests
+]
+
+[project.scripts]
+gsi = "gsi.__main__:app"
+
+[project.urls]
+Homepage = "https://github.com/selvankj/gsi"
+Issues   = "https://github.com/selvankj/gsi/issues"
+
+[tool.setuptools.packages.find]
+where   = ["."]
+include = ["gsi*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

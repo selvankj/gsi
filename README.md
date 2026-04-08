@@ -17,7 +17,6 @@ gsi install-hook                         # 🔐 auto-block commits containing se
 ## Table of Contents
 
 - [Why gsi?](#why-gsi)
-- [How to Upload This to GitHub](#how-to-upload-this-to-github)
 - [Install & Quickstart](#install--quickstart)
 - [Two Modes](#two-modes)
 - [Example Output](#example-output)
@@ -40,78 +39,6 @@ Two moments where security matters most — and where most developers have no to
 2. **Before you use** — Does that open-source dependency have unpatched CVEs? Has it been abandoned?
 
 `gsi` is a single CLI that catches both. Think of it as `npm audit` + `git-secrets` + a trust score, in one command.
-
----
-
-## How to Upload This to GitHub
-
-Follow these steps — this takes about 5 minutes.
-
-### Step 1 — Create a new repository on GitHub
-
-1. Go to **[github.com/new](https://github.com/new)**
-2. Set the repository name to **`gsi`**
-3. Set visibility to **Public** (or Private — your choice)
-4. ⚠️ **Do NOT** tick "Add a README", "Add .gitignore", or "Choose a license" — the repo must be completely empty
-5. Click **Create repository**
-6. Copy the URL shown on the next page — it will look like `https://github.com/selvankj/gsi.git`
-
-### Step 2 — Update your username in two files
-
-Replace `selvankj` with your actual GitHub username:
-
-**In `pyproject.toml`:**
-```toml
-Homepage = "https://github.com/selvankj/gsi"
-Issues   = "https://github.com/selvankj/gsi/issues"
-```
-
-**In `README.md`** (the badge line near the top):
-```markdown
-[![CI](https://github.com/selvankj/gsi/actions/workflows/ci.yml/badge.svg)](https://github.com/selvankj/gsi/actions)
-```
-
-### Step 3 — Push the code
-
-Open a terminal, `cd` into the unzipped `gsi/` folder, and run these commands one by one:
-
-```bash
-# Initialise git
-git init
-
-# Stage all files
-git add .
-
-# First commit
-git commit -m "feat: initial release of gsi security scanner"
-
-# Point to your GitHub repo (replace selvankj)
-git remote add origin https://github.com/selvankj/gsi.git
-
-# Push
-git branch -M main
-git push -u origin main
-```
-
-Your repo is live at `https://github.com/selvankj/gsi` ✅
-
-### Step 4 — Set repo description and topics
-
-1. On your new repo page, click the ⚙️ gear icon next to **About** (top right)
-2. Set the description to:
-   ```
-   Personal security gate — scan for secrets, CVEs, and risk signals before you push or use a repo
-   ```
-3. Add topics: `security` `cli` `secrets` `python` `devtools` `vulnerability-scanner` `github`
-4. Click **Save changes**
-
-### Step 5 — Verify CI is passing
-
-After pushing, go to the **Actions** tab on your repo. You should see a workflow called **CI** running. It will:
-- Run all 46 tests across Python 3.9–3.12
-- Run `gsi check .` on the repo itself (self-scan)
-
-Once it goes green, the badge at the top of this README will light up ✅
 
 ---
 
@@ -469,7 +396,7 @@ gsi/
 │
 ├── .gitignore
 ├── .gsiignore.example                # Copy to .gsiignore to suppress false positives
-├── pyproject.toml                    # Package config — update selvankj here
+├── pyproject.toml                    # Package metadata and dependencies
 ├── CONTRIBUTING.md
 └── LICENSE                           # MIT
 ```
@@ -492,7 +419,7 @@ The most impactful things to contribute:
 git clone https://github.com/selvankj/gsi
 cd gsi
 pip install -e ".[dev]"
-pytest                         # must show 46 passed
+pytest                         # must show 47 passed
 gsi check . --modules secrets  # must return SAFE
 ```
 

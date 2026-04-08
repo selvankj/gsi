@@ -1,0 +1,2 @@
+[secrets] tests/**
+[private_key_pem] tests/**
